@@ -1,0 +1,137 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!--Font Awesome Icons-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+        <!-- Stylesheet -->
+        <style>
+            *{
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+                font-family: "Rubik",sans-serif;
+            }
+            body{
+                background-color: #f5f8ff;
+            }
+            .container{
+                background-color: #ffffff;
+                width: 60%;
+                min-width: 450px;
+                position: relative;
+                margin:  50px auto;
+                padding: 50px 20px;
+                border-radius: 7px;
+                box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+            }
+            input[type="file"]{
+                display: none;
+            }
+            label{
+                display: block;
+                position: relative;
+                background-color: #025bee;
+                color: #ffffff;
+                font-size: 18px;
+                text-align: center;
+                width: 300px;
+                padding: 18px 0;
+                margin: auto;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            .container p{
+                text-align: center;
+                margin: 20px 0 30px 0;
+            }
+            #images{
+                width: 90%;
+                position: relative;
+                margin: auto;
+                display: flex;
+                justify-content: space-evenly;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            figure{
+                width: 45%;
+            }
+            img{
+                width: 100%;
+            }
+            figcaption{
+                text-align: center;
+                font-size: 2.4vmin;
+                margin-top: 0.5vmin;
+            }
+            #submitButton{
+                display: block;
+                position: relative;
+                background-color: #c0c30a;
+                color: #ffffff;
+                font-size: 18px;
+                text-align: center;
+                width: 300px;
+                padding: 18px 0;
+                margin: auto;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                left: 50px;
+            }
+        </style>
+
+</head>
+<body>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form }}
+            <button id="submitButton" type="submit">Upload</button>
+        </form>
+
+    
+        <p id="num-of-files">No Files Chosen</p>
+        <div id="images"></div>
+    </div>
+    <script>
+        $(window).on('beforeunload', function(event){
+        $.ajax({
+       type: "POST",
+        url: "onquit",
+        data: { csrfmiddlewaretoken: '{{ csrf_token }}' }, })
+    
+        });
+        
+        let fileInput = document.getElementById("file-input");
+let imageContainer = document.getElementById("images");
+let numOfFiles = document.getElementById("num-of-files");
+
+function preview(){
+    imageContainer.innerHTML = "";
+    numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
+
+    for(i of fileInput.files){
+        let reader = new FileReader();
+        let figure = document.createElement("figure");
+        let figCap = document.createElement("figcaption");
+        figCap.innerText = i.name;
+        figure.appendChild(figCap);
+        reader.onload=()=>{
+            let img = document.createElement("img");
+            img.setAttribute("src",reader.result);
+            figure.insertBefore(img,figCap);
+        }
+        imageContainer.appendChild(figure);
+        reader.readAsDataURL(i);
+    }
+}
+       </script>
+</body>
+</html>
