@@ -1,3 +1,4 @@
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -48,7 +49,7 @@ header{
   left: 100px;
   position: relative;
   font-size: 25px;
-  border: 2px solid black;
+  border: 3px solid black;
   padding: 12px;
   border-radius: 6px;
 }
@@ -90,9 +91,12 @@ header{
 </head>
 <body class="bg-slate-50">
 <header class="flex justify-between" >
+  <link rel="stylesheet" href="style-tail.css">
 
   <div>
-    <img src="./res/nodbox.png" alt="logo" id="logo">
+
+ 
+    <img src= "{% static '/res/nodbox.png' %}" alt="logo" id="logo">
   </div>
 
   <div class="flex flex-row mr-12 pr-10">
@@ -111,13 +115,16 @@ header{
   
  <div>
    <h1 id="quote">We Make Your Day <p class="text-sky-500 font-bold">Productive</p> </h1>
-   <button id="getStarted">
+   <form action="getstarted" method="POST">
+    {% csrf_token %}
+   <button  id="getstarted">
     Get Started
   </button>
+</form>
   </div>
   
   <div>
-    <img src="./res/Designer _Two Color.png" alt="cover" id="cover">  
+    <img src="{% static '/res/cover.png' %}" alt="cover" id="cover">  
   </div>
 
   

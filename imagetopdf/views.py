@@ -20,7 +20,7 @@ image_array=[]
 pdf_array=[]
 
 
-def index(request):
+def imgtopdfUpload(request):
     if request.method == 'POST':
         image_array.clear()
         print(f'the image array is {image_array}')
@@ -30,19 +30,19 @@ def index(request):
         
         if form.is_valid():
             for image in images:
-                filename=fs.save(image.name, image)
+                filename=fs.save(image.name,image)
                 
                 BASE_DIR = Path(__file__).resolve().parent.parent
                 dir = os.path.join(BASE_DIR, 'imagetopdf/files/images', filename)
                 image_array.append(dir)
                 print(f'the image array is after {image_array}')
-            return redirect('convert')
+            return redirect('imgtopdfconvert')
         else:
             form = ImagePDF()
-    return render(request, 'index.html',{'form':ImagePDF()})
+    return render(request, 'imgtopdf-upload.html',{'form':ImagePDF()})
 
 
-def convert(request):
+def imgtopdfConvert(request):
     if request.method == 'POST':
         
         uuidFilename=str(uuid.uuid4())
@@ -63,7 +63,7 @@ def convert(request):
         asyncImageDeleteFile(image_array)
 
         return response 
-    return render(request, 'convert.html')
+    return render(request, 'imgtopdf-convert.html')
 
 
 
@@ -87,7 +87,7 @@ def asyncImageDeleteFile(filePath):
 
 def onquit(request):
     print("testcall triggered and window closed")
-    return render(request, 'index.html')
+    return render(request, 'home.html')
   
 
 def home(request):
@@ -95,4 +95,8 @@ def home(request):
 
 
 
-    
+def getStarted(request):
+    return render(request, 'convert-home.html')
+
+#def imgtopdfConvert(request):
+ #   return render(request, 'imgtopdf-upload.html')

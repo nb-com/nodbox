@@ -117,4 +117,10 @@ MEDIA_URL = '/images/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'imagetopdf/public')
 django_heroku.settings(locals())
-task=os.path.join(BASE_DIR,"imagetopdf","task")
+
+
+STATICFILES_DIRS = [
+
+    os.path.join(BASE_DIR, 'imagetopdf/public'),
+
+]
