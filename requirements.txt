@@ -1,4 +1,5 @@
 amqp==5.0.9
+APScheduler==3.9.1
 asgiref==3.5.0
 backports.zoneinfo==0.2.1
 billiard==3.6.4.0
@@ -8,9 +9,10 @@ click-didyoumean==0.3.0
 click-plugins==1.1.1
 click-repl==0.2.0
 dj-database-url==0.5.0
-Django==4.0.2
+Django==3.2.12
 django-heroku==0.0.0
 django-on-heroku==1.1.2
+django-timezone-field==4.2.3
 gunicorn==20.1.0
 img2pdf==0.4.3
 kombu==5.2.3
@@ -22,9 +24,13 @@ prompt-toolkit==3.0.28
 psycopg2==2.9.3
 psycopg2-binary==2.9.3
 pyparsing==3.0.7
+python-dateutil==2.8.2
 pytz==2021.3
+pytz-deprecation-shim==0.1.0.post0
 six==1.16.0
 sqlparse==0.4.2
+tzdata==2021.5
+tzlocal==4.1
 vine==5.0.0
 wcwidth==0.2.5
 whitenoise==6.0.0

@@ -59,8 +59,8 @@ def imgtopdfConvert(request):
         mime_type, _ = mimetypes.guess_type(pdf_file)
         response = HttpResponse(path, content_type=mime_type)
         response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilename
-        asyncPDFDeleteFile(pdf_file)
-        asyncImageDeleteFile(image_array)
+        #asyncPDFDeleteFile(pdf_file)
+        #asyncImageDeleteFile(image_array)
 
         return response 
     return render(request, 'imgtopdf-convert.html')
@@ -98,5 +98,3 @@ def home(request):
 def getStarted(request):
     return render(request, 'convert-home.html')
 
-#def imgtopdfConvert(request):
- #   return render(request, 'imgtopdf-upload.html')
