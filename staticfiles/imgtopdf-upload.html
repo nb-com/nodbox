@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nodbox | Image to PDF</title>
+    <!--Font Awesome Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Stylesheet -->
+   <style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Rubik",sans-serif;
+    }
+    body{
+        background-color: #f5f8ff;
+    }
+    .container{
+        background-color: #ffffff;
+        width: 60%;
+        min-width: 450px;
+        position: relative;
+        margin:  50px auto;
+        padding: 50px 20px;
+        border-radius: 7px;
+        box-shadow: 0 20px 35px rgba(0,0,0,0.05);
+    }
+    input[type="file"]{
+        display: none;
+    }
+    label{
+        display: block;
+        position: relative;
+        background-color: #025bee;
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
+        width: 300px;
+        padding: 18px 0;
+        margin: auto;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .container p{
+        text-align: center;
+        margin: 20px 0 30px 0;
+    }
+    #images{
+        width: 90%;
+        position: relative;
+        margin: auto;
+        display: flex;
+        justify-content: space-evenly;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    figure{
+        width: 45%;
+    }
+
+    img{
+        width: 100%;
+    }
+    figcaption{
+        text-align: center;
+        font-size: 2.4vmin;
+        margin-top: 0.5vmin;
+    }
+    #uploadbtn{
+        display: block;
+        position: relative;
+        background-color: #025bee;
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
+        width: 300px;
+        padding: 18px 0;
+        margin: auto;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+    body{
+        font-family: 'Roboto', sans-serif;
+      }
+      #logo{
+      
+        width: 300px;
+        position: relative;
+        padding-right: 50px;
+        top: -10px;
+      }
+      #sec1{
+      width: 100%;
+      height: 600px;
+      }
+      header{
+        width: 100%;
+        height: 100px;
+      }
+      #cover{
+        
+        top: 80;
+        position: relative;
+      }
+      #quote{
+        margin-left: 100px;
+        top: 200px;
+        font-size: 50px;
+        position: relative;
+        
+      }
+      #getStarted{
+      
+        top: 250px;
+        left: 100px;
+        position: relative;
+        font-size: 25px;
+        border: 3px solid black;
+        padding: 12px;
+        border-radius: 6px;
+      }
+      #getStarted:hover{
+        background-color: black;
+        color: white;
+      }
+      
+   </style>
+</head>
+<body>
+    <header class="flex justify-between" >
+        <link rel="stylesheet" href="style-tail.css">
+      
+        <div>
+      
+       
+          <img src= "{% static '/res/nodbox.png' %}" alt="logo" id="logo">
+        </div>
+      
+        <div class="flex flex-row mr-12 pr-10">
+          <ul class="flex flex-row justify-end pt-11 gap-10 ">
+          <form action="home">
+            <li><button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Convert</button></li>
+          </form>
+            <li> <button class="mt-2 font-medium text-gray-500 hover:text-gray-900">Home</button> </li>
+            <li> <button  class="mt-2 font-medium text-gray-500 hover:text-gray-900">Privacy</button></li>
+            <li><button  class="mt-2 font-medium text-gray-500 hover:text-gray-900">Report</button></li>
+          </ul>
+        </div>
+      </header>
+    <div class="container">
+
+        <form action="imgtopdfupload" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form}}
+            <br>
+            
+        <button id="uploadbtn">Upload</button>
+    </form>
+       
+
+        </label>
+        <p id="num-of-files">No Files Selected</p>
+        <div id="images"></div>
+    </div>
+    <!--Script-->
+    <script>
+let fileInput = document.getElementById("file-input");
+let imageContainer = document.getElementById("images");
+let numOfFiles = document.getElementById("num-of-files");
+
+function preview(){
+    imageContainer.innerHTML = "";
+    numOfFiles.textContent = `${fileInput.files.length} Files Selected`;
+
+    for(i of fileInput.files){
+        let reader = new FileReader();
+        let figure = document.createElement("figure");
+        let figCap = document.createElement("figcaption");
+        figCap.innerText = i.name;
+        figure.appendChild(figCap);
+        reader.onload=()=>{
+            let img = document.createElement("img");
+            img.setAttribute("src",reader.result);
+            figure.insertBefore(img,figCap);
+        }
+        imageContainer.appendChild(figure);
+        reader.readAsDataURL(i);
+    }
+}
+    </script>
+</body>
+</html>

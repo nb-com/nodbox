@@ -10,11 +10,9 @@ import mimetypes
 from django.http import HttpResponse, Http404,FileResponse
 import img2pdf
 from PIL import Image
-from celery import Celery
 
 
 
-app = Celery()
 
 image_array=[]
 pdf_array=[]
@@ -67,7 +65,7 @@ def imgtopdfConvert(request):
 
 
 
-@app.task
+
 def asyncPDFDeleteFile(filePath):
     for pdf in filePath:
         if os.path.exists(filePath):                           
@@ -76,7 +74,7 @@ def asyncPDFDeleteFile(filePath):
             print("Can not delete the file as it doesn't exists")
 
 
-@app.task
+
 def asyncImageDeleteFile(filePath):
     for image in filePath:
         if os.path.exists(image):
