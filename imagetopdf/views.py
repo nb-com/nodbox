@@ -90,6 +90,7 @@ def onquit(request):
   
 
 def home(request):
+    image_array.clear()
     return render(request, 'home.html')
 
 
