@@ -44,8 +44,9 @@ def imgtopdfConvert(request):
     if request.method == 'POST':
         
         uuidFilename=str(uuid.uuid4())
+        uuidFilenamepdf=uuidFilename+".pdf"
         BASE_DIR = Path(__file__).resolve().parent.parent
-        pdf_file=os.path.join(BASE_DIR,'imagetopdf/files/pdfs',uuidFilename+'.pdf')
+        pdf_file=os.path.join(BASE_DIR,'imagetopdf/files/pdfs',uuidFilenamepdf)
         pdf_bytes = img2pdf.convert(image_array)
         file = open(pdf_file, "wb")
         file.write(pdf_bytes)
@@ -56,7 +57,7 @@ def imgtopdfConvert(request):
         path=open(pdf_file,'rb')
         mime_type, _ = mimetypes.guess_type(pdf_file)
         response = HttpResponse(path, content_type=mime_type)
-        response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilename
+        response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilenamepdf
         #asyncPDFDeleteFile(pdf_file)
         #asyncImageDeleteFile(image_array)
 
