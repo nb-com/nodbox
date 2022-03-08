@@ -16,11 +16,14 @@ from PIL import Image
 
 image_array=[]
 pdf_array=[]
+imgtopdfuuidFilename=[]
 
 
 def imgtopdfUpload(request):
     if request.method == 'POST':
         image_array.clear()
+        pdf_array.clear()
+        imgtopdfuuidFilename.clear()
         print(f'the image array is {image_array}')
         fs = FileSystemStorage()
         form = ImagePDF(request.POST, request.FILES)
@@ -53,15 +56,18 @@ def imgtopdfConvert(request):
         file.close()
         print("Successfully made pdf file") 
         pdf_array.append(pdf_file)
+        imgtopdfuuidFilename.append(uuidFilenamepdf)
 
-        path=open(pdf_file,'rb')
-        mime_type, _ = mimetypes.guess_type(pdf_file)
-        response = HttpResponse(path, content_type=mime_type)
-        response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilenamepdf
+
+        #path=open(pdf_file,'rb')
+        #mime_type, _ = mimetypes.guess_type(pdf_file)
+        #response = HttpResponse(path, content_type=mime_type)
+        #response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilenamepdf
         #asyncPDFDeleteFile(pdf_file)
         #asyncImageDeleteFile(image_array)
 
-        return response 
+        #return response 
+        return redirect('download')
     return render(request, 'imgtopdf-convert.html')
 
 
@@ -91,6 +97,8 @@ def onquit(request):
 
 def home(request):
     image_array.clear()
+    pdf_array.clear()
+    imgtopdfuuidFilename.clear()
     return render(request, 'home.html')
 
 
@@ -98,3 +106,15 @@ def home(request):
 def getStarted(request):
     return render(request, 'convert-home.html')
 
+
+
+def download(request):
+        pathof=pdf_array[0]
+        filenameof=imgtopdfuuidFilename[0]
+        path=open(pathof,'rb')
+        mime_type, _ = mimetypes.guess_type(pdf_array[0])
+        response = HttpResponse(path, content_type=mime_type)
+        response['Content-Disposition'] = 'attachment; filename=%s' % filenameof
+        return response
+        #asyncPDFDeleteFile(pdf_file)
+        #asyncImageDeleteFile(image_array)

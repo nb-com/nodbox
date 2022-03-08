@@ -11,6 +11,7 @@ urlpatterns = [
     path('convert', views.getStarted, name='getstarted'),
     path('imgtopdfconvert', views.imgtopdfConvert, name='imgtopdfconvert'),
     path('imgtopdfupload', views.imgtopdfUpload, name='imgtopdfupload'),
+    path('download', views.download, name='download'),
 
     
     
