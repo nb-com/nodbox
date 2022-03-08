@@ -3,7 +3,6 @@ APScheduler==3.9.1
 asgiref==3.5.0
 backports.zoneinfo==0.2.1
 billiard==3.6.4.0
-celery==5.2.3
 click==8.0.4
 click-didyoumean==0.3.0
 click-plugins==1.1.1
