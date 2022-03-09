@@ -100,6 +100,10 @@ def getStarted(request):
 
 
 
+def onquit(request):
+    print("testcall triggered and window closed")
+    return render(request, 'home.html')
+
 def download(request):
         pathof=pdf_array[0]
         filenameof=imgtopdfuuidFilename[0]
