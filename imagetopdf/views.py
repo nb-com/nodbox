@@ -86,8 +86,6 @@ def home(request):
 def getStarted(request):
     return render(request, 'convert-home.html')
 
-
-
 def onquit(request):
     print("testcall triggered and window closed")
     return render(request, 'home.html')
