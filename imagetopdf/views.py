@@ -77,6 +77,21 @@ def download(request):
         #asyncPDFDeleteFile(pdf_file)
         #asyncImageDeleteFile(image_array)
 
+def home(request):
+    image_array.clear()
+    pdf_array.clear()
+    imgtopdfuuidFilename.clear()
+    return render(request, 'home.html')
+
+def getStarted(request):
+    return render(request, 'convert-home.html')
+
+
+
+def onquit(request):
+    print("testcall triggered and window closed")
+    return render(request, 'home.html')
+
 
 def asyncPDFDeleteFile(filePath):
     for pdf in filePath:
@@ -98,19 +113,6 @@ def asyncImageDeleteFile(filePath):
 
   
 
-def home(request):
-    image_array.clear()
-    pdf_array.clear()
-    imgtopdfuuidFilename.clear()
-    return render(request, 'home.html')
 
-def getStarted(request):
-    return render(request, 'convert-home.html')
-
-
-
-def onquit(request):
-    print("testcall triggered and window closed")
-    return render(request, 'home.html')
 
 
