@@ -32,20 +32,19 @@ def imgtopdfUpload(request):
         if form.is_valid():
             for image in images:
                 filename=fs.save(image.name,image)
-                
                 BASE_DIR = Path(__file__).resolve().parent.parent
                 dir = os.path.join(BASE_DIR, 'imagetopdf/files/images', filename)
                 image_array.append(dir)
                 print(f'the image array is after {image_array}')
             return redirect('imgtopdfconvert')
         else:
+            print("failed at for loop of adding images to array")
             form = ImagePDF()
     return render(request, 'imgtopdf-upload.html',{'form':ImagePDF()})
 
 
 def imgtopdfConvert(request):
     if request.method == 'POST':
-        
         uuidFilename=str(uuid.uuid4())
         uuidFilenamepdf=uuidFilename+".pdf"
         BASE_DIR = Path(__file__).resolve().parent.parent
@@ -57,15 +56,12 @@ def imgtopdfConvert(request):
         print("Successfully made pdf file") 
         pdf_array.append(pdf_file)
         imgtopdfuuidFilename.append(uuidFilenamepdf)
-
-
         #path=open(pdf_file,'rb')
         #mime_type, _ = mimetypes.guess_type(pdf_file)
         #response = HttpResponse(path, content_type=mime_type)
         #response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilenamepdf
         #asyncPDFDeleteFile(pdf_file)
         #asyncImageDeleteFile(image_array)
-
         #return response 
         return redirect('download')
     return render(request, 'imgtopdf-convert.html')
@@ -90,9 +86,7 @@ def asyncImageDeleteFile(filePath):
             print("Can not delete the file as it doesn't exists")
 
 
-def onquit(request):
-    print("testcall triggered and window closed")
-    return render(request, 'home.html')
+
   
 
 def home(request):
@@ -100,8 +94,6 @@ def home(request):
     pdf_array.clear()
     imgtopdfuuidFilename.clear()
     return render(request, 'home.html')
-
-
 
 def getStarted(request):
     return render(request, 'convert-home.html')
@@ -112,7 +104,7 @@ def download(request):
         pathof=pdf_array[0]
         filenameof=imgtopdfuuidFilename[0]
         path=open(pathof,'rb')
-        mime_type, _ = mimetypes.guess_type(pdf_array[0])
+        mime_type, _ = mimetypes.guess_type(pathof)
         response = HttpResponse(path, content_type=mime_type)
         response['Content-Disposition'] = 'attachment; filename=%s' % filenameof
         return response
