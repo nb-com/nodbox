@@ -66,7 +66,16 @@ def imgtopdfConvert(request):
         return redirect('download')
     return render(request, 'imgtopdf-convert.html')
 
-
+def download(request):
+        pathof=pdf_array[0]
+        filenameof=imgtopdfuuidFilename[0]
+        path=open(pathof,'rb')
+        mime_type, _ = mimetypes.guess_type(pathof)
+        response = HttpResponse(path, content_type=mime_type)
+        response['Content-Disposition'] = 'attachment; filename=%s' % filenameof
+        return response
+        #asyncPDFDeleteFile(pdf_file)
+        #asyncImageDeleteFile(image_array)
 
 
 def asyncPDFDeleteFile(filePath):
@@ -104,13 +113,4 @@ def onquit(request):
     print("testcall triggered and window closed")
     return render(request, 'home.html')
 
-def download(request):
-        pathof=pdf_array[0]
-        filenameof=imgtopdfuuidFilename[0]
-        path=open(pathof,'rb')
-        mime_type, _ = mimetypes.guess_type(pathof)
-        response = HttpResponse(path, content_type=mime_type)
-        response['Content-Disposition'] = 'attachment; filename=%s' % filenameof
-        return response
-        #asyncPDFDeleteFile(pdf_file)
-        #asyncImageDeleteFile(image_array)
+
