@@ -14,17 +14,11 @@ from PIL import Image
 
 
 
-image_array=[]
-pdf_array=[]
-imgtopdfuuidFilename=[]
 
 
 def imgtopdfUpload(request):
     if request.method == 'POST':
-        image_array.clear()
-        pdf_array.clear()
-        imgtopdfuuidFilename.clear()
-        print(f'the image array is {image_array}')
+        
         fs = FileSystemStorage()
         form = ImagePDF(request.POST, request.FILES)
         images = request.FILES.getlist('images')
@@ -34,9 +28,13 @@ def imgtopdfUpload(request):
                 filename=fs.save(image.name,image)
                 BASE_DIR = Path(__file__).resolve().parent.parent
                 dir = os.path.join(BASE_DIR, 'imagetopdf/files/images', filename)
-                image_array.append(dir)
-                print(f'the image array is after {image_array}')
+                request.session["user"].append(dir)
+                request.session.save()
+                for key, value in request.session.items():
+                    print('{} => {}'.format(key, value))
+
             return redirect('imgtopdfconvert')
+
         else:
             print("failed at for loop of adding images to array")
             form = ImagePDF()
@@ -49,13 +47,14 @@ def imgtopdfConvert(request):
         uuidFilenamepdf=uuidFilename+".pdf"
         BASE_DIR = Path(__file__).resolve().parent.parent
         pdf_file=os.path.join(BASE_DIR,'imagetopdf/files/pdfs',uuidFilenamepdf)
-        pdf_bytes = img2pdf.convert(image_array)
+        pdf_bytes = img2pdf.convert(request.session["user"])
         file = open(pdf_file, "wb")
         file.write(pdf_bytes)
         file.close()
         print("Successfully made pdf file") 
-        pdf_array.append(pdf_file)
-        imgtopdfuuidFilename.append(uuidFilenamepdf)
+        request.session["pdffilepath"].append(pdf_file)
+        request.session["uuidfilenamepath"].append(uuidFilenamepdf)
+        request.session.save()
         #path=open(pdf_file,'rb')
         #mime_type, _ = mimetypes.guess_type(pdf_file)
         #response = HttpResponse(path, content_type=mime_type)
@@ -67,8 +66,8 @@ def imgtopdfConvert(request):
     return render(request, 'imgtopdf-convert.html')
 
 def download(request):
-        pathof=pdf_array[0]
-        filenameof=imgtopdfuuidFilename[0]
+        pathof=request.session["pdffilepath"][0]
+        filenameof=request.session["uuidfilenamepath"][0]
         path=open(pathof,'rb')
         mime_type, _ = mimetypes.guess_type(pathof)
         response = HttpResponse(path, content_type=mime_type)
@@ -78,13 +77,15 @@ def download(request):
         #asyncImageDeleteFile(image_array)
 
 def home(request):
-    image_array.clear()
-    pdf_array.clear()
-    imgtopdfuuidFilename.clear()
+    request.session["user"] = []
+    request.session["pdffilepath"] = []
+    request.session["uuidfilenamepath"] = []
     return render(request, 'home.html')
 
 def getStarted(request):
     return render(request, 'convert-home.html')
+
+
 
 def onquit(request):
     print("testcall triggered and window closed")
@@ -98,8 +99,6 @@ def asyncPDFDeleteFile(filePath):
         else:
             print("Can not delete the file as it doesn't exists")
 
-
-
 def asyncImageDeleteFile(filePath):
     for image in filePath:
         if os.path.exists(image):
@@ -110,6 +109,7 @@ def asyncImageDeleteFile(filePath):
 
 
   
+
 
 
 
