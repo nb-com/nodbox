@@ -2,6 +2,12 @@ import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+
+
+# Function to delete the files from the server which executes at specific intervals mentioned in schedule.py
+
+
 def ImagetopdfDeleteImagesTrigger():
     print("ImagetopdfDeleteImagesTrigger triggered")
     dir = os.path.join(BASE_DIR,'imagetopdf/files/images')

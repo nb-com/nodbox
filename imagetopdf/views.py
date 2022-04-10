@@ -15,14 +15,21 @@ from PIL import Image
 
 
 
+def home(request):
+    # Establishes the session
+    request.session["images"] = []
+    request.session["pdffilepath"] = []
+    request.session["uuidfilenamepath"] = []
+    return render(request, 'home.html')
 
 def imgtopdfUpload(request):
     if request.method == 'POST':
-        
+        # we use File System Storage to save the uploaded files
         fs = FileSystemStorage()
         form = ImagePDF(request.POST, request.FILES)
+        # get images from request
         images = request.FILES.getlist('images')
-        
+        # adding each image to session and also saving it to the server
         if form.is_valid():
             for image in images:
                 filename=fs.save(image.name,image)
@@ -32,7 +39,6 @@ def imgtopdfUpload(request):
                 request.session.save()
                 for key, value in request.session.items():
                     print('{} => {}'.format(key, value))
-
             return redirect('imgtopdfconvert')
 
         else:
@@ -43,22 +49,28 @@ def imgtopdfUpload(request):
 
 def imgtopdfConvert(request):
     if request.method == 'POST':
+        # uuid for unique filename for PDF
         uuidFilename=str(uuid.uuid4())
         uuidFilenamepdf=uuidFilename+".pdf"
         BASE_DIR = Path(__file__).resolve().parent.parent
+        # Joins the BASE_DIR and the path of the PDF file
         pdf_file=os.path.join(BASE_DIR,'imagetopdf/files/pdfs',uuidFilenamepdf)
+        # Converts the images to PDF
         pdf_bytes = img2pdf.convert(request.session["images"])
         file = open(pdf_file, "wb")
         file.write(pdf_bytes)
         file.close()
         print("Successfully made pdf file") 
+        # Appends the path of the PDF file to the session
         request.session["pdffilepath"].append(pdf_file)
         request.session["uuidfilenamepath"].append(uuidFilenamepdf)
+        # Saving Session
         request.session.save()
         return redirect('download')
     return render(request, 'imgtopdf-convert.html')
 
 def download(request):
+        # Downloads the PDF file
         pathof=request.session["pdffilepath"][0]
         filenameof=request.session["uuidfilenamepath"][0]
         path=open(pathof,'rb')
@@ -66,14 +78,8 @@ def download(request):
         response = HttpResponse(path, content_type=mime_type)
         response['Content-Disposition'] = 'attachment; filename=%s' % filenameof
         return response
-        #asyncPDFDeleteFile(pdf_file)
-        #asyncImageDeleteFile(image_array)
 
-def home(request):
-    request.session["images"] = []
-    request.session["pdffilepath"] = []
-    request.session["uuidfilenamepath"] = []
-    return render(request, 'home.html')
+
 
 def getStarted(request):
     return render(request, 'convert-home.html')
