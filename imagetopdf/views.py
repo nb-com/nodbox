@@ -91,19 +91,7 @@ def onquit(request):
     return render(request, 'home.html')
 
 
-def asyncPDFDeleteFile(filePath):
-    for pdf in filePath:
-        if os.path.exists(filePath):                           
-            os.remove(filePath)
-        else:
-            print("Can not delete the file as it doesn't exists")
 
-def asyncImageDeleteFile(filePath):
-    for image in filePath:
-        if os.path.exists(image):
-            os.remove(image)
-        else:
-            print("Can not delete the file as it doesn't exists")
 
 
 
