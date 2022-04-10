@@ -2,13 +2,29 @@
 Nodbox is an open source Online file converting solution.
 
 
-# Deployment
+## Deployment
 The Website is Deployed at https://nodbox.herokuapp.com/
 
-# Requirments
-Required Packages can be found at requirments.txt
+## Requirements
+Required Packages can be found at **requirements.txt**
 
-# Features
+## Features
 
 1) Image to PDF
 2) PDF to Image (under development)
+
+## Get Started
+
+1) Clone Repository - https://github.com/nb-com/nb.git
+2) Create a virtual environment <br />
+a) To install virtual environment.
+  
+  ```
+  pip install virtualenv
+  ```
+b) Activate virtual environment according to your operating system.
+c) Install Required Packages by
+
+```
+pip install -r requirements.txt
+```
