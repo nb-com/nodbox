@@ -28,7 +28,7 @@ def imgtopdfUpload(request):
                 filename=fs.save(image.name,image)
                 BASE_DIR = Path(__file__).resolve().parent.parent
                 dir = os.path.join(BASE_DIR, 'imagetopdf/files/images', filename)
-                request.session["user"].append(dir)
+                request.session["images"].append(dir)
                 request.session.save()
                 for key, value in request.session.items():
                     print('{} => {}'.format(key, value))
@@ -47,7 +47,7 @@ def imgtopdfConvert(request):
         uuidFilenamepdf=uuidFilename+".pdf"
         BASE_DIR = Path(__file__).resolve().parent.parent
         pdf_file=os.path.join(BASE_DIR,'imagetopdf/files/pdfs',uuidFilenamepdf)
-        pdf_bytes = img2pdf.convert(request.session["user"])
+        pdf_bytes = img2pdf.convert(request.session["images"])
         file = open(pdf_file, "wb")
         file.write(pdf_bytes)
         file.close()
@@ -55,13 +55,6 @@ def imgtopdfConvert(request):
         request.session["pdffilepath"].append(pdf_file)
         request.session["uuidfilenamepath"].append(uuidFilenamepdf)
         request.session.save()
-        #path=open(pdf_file,'rb')
-        #mime_type, _ = mimetypes.guess_type(pdf_file)
-        #response = HttpResponse(path, content_type=mime_type)
-        #response['Content-Disposition'] = 'attachment; filename=%s' % uuidFilenamepdf
-        #asyncPDFDeleteFile(pdf_file)
-        #asyncImageDeleteFile(image_array)
-        #return response 
         return redirect('download')
     return render(request, 'imgtopdf-convert.html')
 
@@ -77,7 +70,7 @@ def download(request):
         #asyncImageDeleteFile(image_array)
 
 def home(request):
-    request.session["user"] = []
+    request.session["images"] = []
     request.session["pdffilepath"] = []
     request.session["uuidfilenamepath"] = []
     return render(request, 'home.html')
