@@ -10,8 +10,8 @@ Required Packages can be found at **requirements.txt**
 
 ## Features
 
-1) Image to PDF
-2) PDF to Image (under development)
+1) Convert Image to PDF
+2) Convert PDF to Image (under development)
 
 ## Get Started
 
