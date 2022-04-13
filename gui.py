@@ -22,4 +22,4 @@ def start_startdjango():
 
 if __name__ == '__main__':
     Thread(target=start_startdjango).start()
-    start_webview()
+    start_webview() 
