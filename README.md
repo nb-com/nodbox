@@ -33,3 +33,9 @@ pip install -r requirements.txt
  python manage.py runserver
  ```
  Now the server will be serving at localhost 8000
+ 
+ ## To Launch as a Deskapp
+ 
+```
+python gui.py
+```
