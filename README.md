@@ -39,8 +39,11 @@ pip install -r requirements.txt
  Now the server will be serving at localhost 8000
  
  ## To Launch as a Deskapp
- Run 
- 
+**Windows**
+```
+python3 nodbox.py
+```
+**Mac OS and other Operating Systems**
 ```
 python nodbox.py
 ```
