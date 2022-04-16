@@ -26,6 +26,11 @@ a) To install virtual environment.
   ```
   pip install virtualenv
   ```
+ 
+ ```
+  virtualenv env
+  ```
+  
  b)Activate virtual environment according to your operating system. <br />
 3. Install Required Packages by
 
