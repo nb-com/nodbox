@@ -1,7 +1,7 @@
 # Nodbox
-Nodbox is an open source Online file converting solution.The website is developed with django at back-end and Tailwind at front-end.<br /> 
+Nodbox is an open source  **File Handling Deskapp**.The App is developed with **Django** at back-end and **Tailwind** at front-end.<br /> 
 
-Discord - https://discord.gg/AQJtJfGwh7<br />
+**Discord** - https://discord.gg/AQJtJfGwh7<br />
 
 
 
@@ -44,4 +44,4 @@ pip install -r requirements.txt
 ```
 python gui.py
 ```
-(Has various bugs)
+**(Has various bugs)**
