@@ -1,5 +1,9 @@
 # Nodbox
-Nodbox is an open source Online file converting solution.The website is developed with django at back-end and Tailwind at front-end.<br /> **Contributions are Appreciated **
+Nodbox is an open source Online file converting solution.The website is developed with django at back-end and Tailwind at front-end.<br /> 
+
+Discord - https://discord.gg/AQJtJfGwh7<br />
+
+
 
 
 ## Deployment
