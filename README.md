@@ -42,6 +42,6 @@ pip install -r requirements.txt
  Run 
  
 ```
-python gui.py
+python nodbox.py
 ```
 **(Has various bugs)**
