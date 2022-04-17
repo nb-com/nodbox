@@ -33,11 +33,11 @@ a) To install virtual environment.
   
   b) Activate virtual environment according to your operating system. <br />
   
- **For Windows**
+ **Windows**
  ```
  .\env\Scripts\activate
  ```
- **For Mac OS**
+ **Mac OS**
  ```
  source env/bin/activate
  ```
