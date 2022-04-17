@@ -31,8 +31,17 @@ a) To install virtual environment.
   virtualenv env
   ```
   
- b)Activate virtual environment according to your operating system. <br />
-3. Install Required Packages by
+  b) Activate virtual environment according to your operating system. <br />
+  
+ **For Windows**
+ ```
+ .\env\Scripts\activate
+ ```
+ **For Mac OS**
+ ```
+ source env/bin/activate
+ ```
+3.Install Required Packages by
 
 ```
 pip install -r requirements.txt
