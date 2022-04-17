@@ -19,7 +19,7 @@ Required Packages can be found at **requirements.txt**
 
 ## Get Started
 
-1. Clone Repository - https://github.com/nb-com/nb.git
+1. Clone Repository - https://github.com/nb-com/nodbox.git
 2. Create a virtual environment <br />
 a) To install virtual environment.
   
