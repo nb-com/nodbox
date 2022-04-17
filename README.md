@@ -7,7 +7,7 @@ Nodbox is an open source  **File Handling Deskapp**.The App is developed with **
 
 
 ## Deployment
-The Website is Deployed at https://nodbox.herokuapp.com (under development)
+The Website is Deployed at https://nodbox.herokuapp.com
 
 ## Requirements
 Required Packages can be found at **requirements.txt**
