@@ -46,7 +46,7 @@ a) To install virtual environment.
 ```
 pip install -r requirements.txt
 ```
-4. Start the server by
+4. For Development Start the server by
  ```
  python manage.py runserver
  ```
