@@ -19,7 +19,8 @@ Required Libraries can be found at **requirements.txt**
 
 ## Get Started
 
-1. Clone Repository - https://github.com/nb-com/nodbox.git
+1. Clone Repository - https://github.com/nb-com/nodbox.git  <br />
+   (Python 3.8 Recommended)
 2. Create a virtual environment <br />
 a) To install virtual environment.
   
