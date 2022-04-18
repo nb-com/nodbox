@@ -48,7 +48,7 @@ pip install -r requirements.txt
 ```
 4. For Development Start the server by
  ```
- python manage.py runserver
+ python manage.py runserver 8000
  ```
  Now the server will be serving at localhost 8000
  
