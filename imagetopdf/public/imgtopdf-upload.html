@@ -135,14 +135,11 @@
 <body>
     <header class="flex justify-between" >
         <link rel="stylesheet" href="style-tail.css">
-      
         <div>
-      
             <a href="home">
           <img src= "{% static '/res/nodbox.png' %}" alt="logo" id="logo">
             </a>
         </div>
-      
         <div class="flex flex-row mr-12 pr-10">
           <ul class="flex flex-row justify-end pt-11 gap-10 ">
             <li> <a href="home"><button class="mt-2 font-medium text-gray-500 hover:text-gray-900">Home</button></a> </li>
@@ -152,15 +149,12 @@
         </div>
       </header>
     <div class="container">
-
         <form action="imgtopdfupload" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form}}
             <br>
-            
-        <button id="uploadbtn">Upload</button>
+        <button id="uploadbtn" >Convert to image</button>
     </form>
-       
 
         </label>
         <p id="num-of-files">No Files Selected</p>
