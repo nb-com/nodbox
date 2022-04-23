@@ -7,7 +7,7 @@ import webview
 port=8889
 
 def start_webview():
-    window = webview.create_window('Nodbox', f'http://localhost:{port}/', confirm_close=True, width=900, height=600)
+    window = webview.create_window('Nodbox', f'http://localhost:{port}/', confirm_close=True, width=1920, height=1080)
     webview.start()
     window.closed = os._exit(0)
 
