@@ -62,4 +62,4 @@ python3 nodbox.py
 ```
 python nodbox.py
 ```
-**(Has various bugs)**
+**(Has numerous bugs)**
