@@ -1,0 +1,21 @@
+{
+  "name": "nb2255",
+  "version": "1.0.0",
+  "description": "Nodbox is an open source  **File Handling Deskapp**.The App is developed with **Django** at back-end and **Tailwind** at front-end.<br />",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/nb-com/nb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nb-com/nb/issues"
+  },
+  "homepage": "https://github.com/nb-com/nb#readme"
+}
